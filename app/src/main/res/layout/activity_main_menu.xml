@@ -30,6 +30,7 @@
             android:layout_height="40dp"
             android:textAlignment="center"
             android:text="Настройки"
+            android:onClick="toSet_About"
             android:background="@color/white"
             android:layout_marginBottom="20dp"/>
         <TextView
