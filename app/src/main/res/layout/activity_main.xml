@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fon1"/>
+    <ImageView
+        android:id="@+id/enemy"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center" />
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:layout_gravity="bottom | center_horizontal"
+        android:layout_marginBottom="15dp"/>
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:background="@color/red"
+        android:layout_gravity="bottom | center_horizontal"
+        android:layout_marginBottom="20dp"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:onClick="toMainMenu"
+        android:src="@drawable/menu" />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="right"
+        android:src="@drawable/magaz" />
+
+</FrameLayout>
