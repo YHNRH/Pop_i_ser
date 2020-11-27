@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     ImageView enemy;
     TextView hp;
     TextView hb;
+    TextView damage;
+    TextView chance;
+    TextView crit;
     Enemy enemy_o;
-    Hero hero = new Hero();
     float pixels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         enemy = findViewById(R.id.enemy);
         hp = findViewById(R.id.hp);
         hb = findViewById(R.id.hb);
+        damage = findViewById(R.id.damage);
+        chance = findViewById(R.id.chance);
+        crit = findViewById(R.id.crit);
+        damage.setText(String.valueOf("Урон " + Hero.getDamage()));
+        chance.setText(String.valueOf("Шанс крита " + Hero.getCritChance()));
+        crit.setText(String.valueOf("Критический урон " + Hero.getCritDamage()));
         enemy_o = Location.getEnemy();
         hp.setText(String.valueOf(enemy_o.getHealth()));
         int img = getResources().getIdentifier("drawable/e"+enemy_o.getImage(), null, getPackageName());
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case MotionEvent.ACTION_MOVE: // движение
                 break;
             case MotionEvent.ACTION_UP: // отпускание
-                if (enemy_o.getHealth()-hero.getAttack()<=0) {
+                if (enemy_o.getHealth()-Hero.getAttack()<=0) {
                     enemy_o = Location.getEnemy();
                     int img = getResources().getIdentifier("drawable/e"+enemy_o.getImage(), null, getPackageName());
                     enemy.setImageResource(img);
@@ -59,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     enemy.setColorFilter(ContextCompat.getColor(this,R.color.no_color));
                 }
                 else {
-                    enemy_o.isAttacked(hero.getAttack());
+                    enemy_o.isAttacked(Hero.getAttack());
                     hp.setText(String.valueOf(enemy_o.getHealth()));
                     LinearLayout.LayoutParams param = new LinearLayout.LayoutParams((int) ((float)enemy_o.getHealth()/ (float)enemy_o.getMaxHealth()*34*pixels),(int)(6*pixels));
                     param.gravity = Gravity.CENTER;

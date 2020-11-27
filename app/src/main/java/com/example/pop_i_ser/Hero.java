@@ -1,47 +1,47 @@
 package com.example.pop_i_ser;
 
 public class Hero {
-    int damage = 1;
-    double critDamage = 2.0;
-    int critChance = 0;
-    public int gold = 10000000;
+    static int damage = 1;
+    static double critDamage = 2.0;
+    static int critChance = 0;
+    static public int gold = 10000000;
 
-    public int getAttack() {
+    static public int getAttack() {
         if ((int)(Math.random()*100)<=critChance){
             return (int) (damage*critDamage);
         }
         else { return damage;}
     }
 
-    public void addDamage(int addDamage) {
-        this.damage += addDamage;
+    static public void addDamage(int addDamage) {
+        damage += addDamage;
     }
 
-    public void addCritChance(int addChance) {
-        this.critChance += addChance;
+    static public void addCritChance(int addChance) {
+        critChance += addChance;
     }
 
-    public void addCritDamage(double addDamage) {
-        if(critDamage!=100.0) {this.critDamage += addDamage;}
+    static public void addCritDamage(double addDamage) {
+        if(critDamage!=100.0) {critDamage += addDamage;}
     }
 
-    public void addGold(int gold) {
-        this.gold += gold;
+    static public void addGold(int gold) {
+        gold += gold;
     }
 
-    public int getDamage() {
+    static public int getDamage() {
         return damage;
     }
 
-    public int getGold() {
+    static public int getGold() {
         return gold;
     }
 
-    public int getCritChance() {
+    static public int getCritChance() {
         return critChance;
     }
 
-    public double getCritDamage() {
+    static public double getCritDamage() {
         return critDamage;
     }
 }
