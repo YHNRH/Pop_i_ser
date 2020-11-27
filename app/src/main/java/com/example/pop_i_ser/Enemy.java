@@ -2,12 +2,14 @@ package com.example.pop_i_ser;
 
 public class Enemy {
     public int health;
+    int max_health;
     public int gold;
     public int stage;
     public Enemy(int stage)
     {
         this.stage = stage;
-        health = stage*10 ;
+        max_health = stage*10 ;
+        health=max_health;
         gold   = stage*5  ;
     }
 
@@ -18,6 +20,11 @@ public class Enemy {
     public int getHealth()
     {
         return health;
+    }
+
+    public int getMaxHealth()
+    {
+        return max_health;
     }
 
 
