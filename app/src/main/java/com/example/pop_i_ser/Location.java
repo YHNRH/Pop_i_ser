@@ -1,7 +1,7 @@
 package com.example.pop_i_ser;
 
 public class Location {
-    static int enemyCounter=0;
+    public static int enemyCounter=0;
     static int stage=1;
     static Enemy getEnemy()
     {
@@ -12,5 +12,14 @@ public class Location {
         }
         enemyCounter++;
         return new Enemy(stage);
+    }
+
+    static int getStage()
+    {
+        return stage;
+    }
+
+    public static void setStage(int stage) {
+        Location.stage = stage;
     }
 }

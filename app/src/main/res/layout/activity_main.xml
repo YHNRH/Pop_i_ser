@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/fon1"/>
+        android:id="@+id/background"
+        android:src="@drawable/l1"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -34,6 +35,12 @@
             android:layout_height="wrap_content"
             android:text="Урон крита"
             android:id="@+id/crit"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Золото"
+            android:id="@+id/gold"
             android:textColor="@color/black"/>
     </LinearLayout>
     <LinearLayout
