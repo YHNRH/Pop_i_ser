@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Enemy enemy_o;
     ImageView background;
     SharedPreferences mSettings;
-    private SoundPool mSoundPool;
+    private static SoundPool mSoundPool;
     private AssetManager mAssetManager;
     int hit_counter=0;
-    private int hs_m_0,hs_m_1,hs_m_2,hs_w_0,hs_w_1,hs_w_2,hs_mo_0,hs_mo_1,hs_mo_2;
+    private int hs_m_0,hs_m_1,hs_m_2,hs_w_0,hs_w_1,hs_w_2,hs_mo_0,hs_mo_1,hs_mo_2, s1,s2,s3,s4,s5;
     float pixels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mSettings = getSharedPreferences("my_settings", Context.MODE_PRIVATE);
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
         mAssetManager = getAssets();
+//        s1 = loadSound("s1.mp3");
+//        s2 = loadSound("s2.mp3");
+//        s3 = loadSound("s3.mp3");
+//        s4 = loadSound("s4.mp3");
+//        s5 = loadSound("s5.mp3");
         hs_m_0 = loadSound("hs_m_0.mp3");
         hs_m_1 = loadSound("hs_m_1.mp3");
         hs_m_2 = loadSound("hs_m_2.mp3");
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         hs_mo_0 = loadSound("hs_mo_0.mp3");
         hs_mo_1 = loadSound("hs_mo_1.mp3");
         hs_mo_2 = loadSound("hs_mo_2.mp3");
+
         Hero.setGold(mSettings.getInt("gold", 0));
         Shop.setGoldForCC(mSettings.getInt("goldCC", 100));
         Shop.setGoldForCD(mSettings.getInt("goldCD", 100));
@@ -80,10 +86,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         crit.setText(String.valueOf("Критический урон " + Hero.getCritDamage()));
         enemy_o = Location.getEnemy();
         hp.setText(String.valueOf(enemy_o.getHealth()));
-        int img = getResources().getIdentifier("drawable/e"+enemy_o.getImage(), null, getPackageName());
-        enemy.setImageResource(img);
-        int img_b = getResources().getIdentifier("drawable/l"+Location.getStage(), null, getPackageName());
-        background.setImageResource(img_b);
+        if(Location.getEnemyCounter()==11) {
+            int img_b = getResources().getIdentifier("drawable/b" + Location.getStage(), null, getPackageName());
+            enemy.setImageResource(img_b);
+        }
+        else {
+            int img = getResources().getIdentifier("drawable/e" + enemy_o.getImage(), null, getPackageName());
+            enemy.setImageResource(img);
+        }
+        int img_l = getResources().getIdentifier("drawable/l"+Location.getStage(), null, getPackageName());
+        background.setImageResource(img_l);
 
         enemy.setOnTouchListener(this);
     }
@@ -96,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                 enemy.setLayoutParams(new LinearLayout.LayoutParams((int) (20*pixels),(int)(20*pixels)));
                 enemy.setColorFilter(ContextCompat.getColor(this,R.color.no_red));
+
                 if (hit_counter==0){
                 switch(enemy_o.getImage())
             {
@@ -235,14 +248,22 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case MotionEvent.ACTION_MOVE: // движение
                 break;
             case MotionEvent.ACTION_UP: // отпускание
+
                 if (enemy_o.getHealth()-Hero.getAttack()<=0) {
                     Hero.addGold(enemy_o.getGold());
                     gold.setText("Золото " + Hero.getGold());
                     enemy_o = Location.getEnemy();
-                    int img_b = getResources().getIdentifier("drawable/l"+Location.getStage(), null, getPackageName());
-                    background.setImageResource(img_b);
+                    int img_b = getResources().getIdentifier("drawable/b" + Location.getStage(), null, getPackageName());
                     int img = getResources().getIdentifier("drawable/e"+enemy_o.getImage(), null, getPackageName());
-                    enemy.setImageResource(img);
+                    if(Location.enemyCounter == 11){
+                        enemy.setImageResource(img_b);
+                    }
+                    else {
+                        enemy.setImageResource(img);
+                    }
+                    int img_l = getResources().getIdentifier("drawable/l"+Location.getStage(), null, getPackageName());
+                    background.setImageResource(img_l);
+
                     hp.setText(String.valueOf(enemy_o.getHealth()));
                     enemy.setLayoutParams(new LinearLayout.LayoutParams((int) (34*pixels),(int)(34*pixels)));
                     LinearLayout.LayoutParams param = new LinearLayout.LayoutParams((int) (enemy_o.getHealth()/enemy_o.getMaxHealth()*34*pixels),(int)(6*pixels));
@@ -321,8 +342,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return mSoundPool.load(afd, 1);
     }
-    protected void playSound(int sound) {
+    protected static void playSound(int sound) {
         if (sound > 0)
             mSoundPool.play(sound, 1, 1, 1, 0, 1);
     }
+
+
 }

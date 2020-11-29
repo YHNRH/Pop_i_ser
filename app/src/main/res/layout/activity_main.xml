@@ -64,10 +64,9 @@
         android:onClick="toMainMenu"
         android:src="@drawable/menu" />
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
         android:layout_gravity="right"
         android:onClick="toShop"
         android:src="@drawable/magaz" />

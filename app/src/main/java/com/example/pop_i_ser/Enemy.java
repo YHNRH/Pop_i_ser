@@ -12,8 +12,7 @@ public class Enemy {
         max_health = stage*10 ;
         health=max_health;
         gold   = stage*5  ;
-        image = (int) ((Math.random()*2)+(stage*2));
-    }
+        image = (int) ((Math.random()*2)+(stage*2));}
 
     public void isAttacked(int attack) {
         this.health -= attack;
